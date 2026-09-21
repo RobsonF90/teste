@@ -20,7 +20,7 @@ export default function Footer({ language, onNavigate }: FooterProps) {
             <div className="flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('home')}>
               <BrandLogo size="md" />
             </div>
-            <p className="text-sm text-neutral-400 max-w-sm leading-relaxed">
+            <p className="text-sm sm:text-base text-neutral-300 max-w-md leading-relaxed font-normal">
               {t.footer.description}
             </p>
             <p className="text-xs text-neutral-500 font-mono">

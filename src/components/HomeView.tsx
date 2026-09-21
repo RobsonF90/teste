@@ -311,7 +311,10 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
 
       {/* Opening Hours & Atmosphere Teaser */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="relative rounded-xl bg-gold-dark border border-gold/40 p-8 sm:p-12 md:p-16 overflow-hidden gold-glow">
+        <div 
+          onClick={() => onNavigate('contact')}
+          className="relative rounded-xl bg-gold-dark border border-gold/40 hover:border-gold p-8 sm:p-12 md:p-16 overflow-hidden gold-glow transition-all cursor-pointer group"
+        >
           {/* Absolute decorative glow */}
           <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-gold/10 blur-3xl pointer-events-none" />
 
@@ -327,10 +330,10 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
                 ? 'Open Every Day | 23:00 – 05:00'
                 : 'Aberto Todos os Dias | 23:00 – 05:00'}
             </p>
-            <p className="text-sm text-neutral-300 leading-relaxed">
+            <p className="text-sm sm:text-base text-neutral-200 leading-relaxed font-normal">
               {language === 'en' 
-                ? 'Join us for an unforgettable night. Advance reservations are highly recommended.'
-                : 'Junte-se a nós para uma noite inesquecível. Reservas antecipadas são altamente recomendadas.'}
+                ? 'Join us for an unforgettable night. Advance reservations by clicking the card below.'
+                : 'Junte-se a nós para uma noite inesquecível. Reservas antecipadas clicando no card abaixo.'}
             </p>
             <div className="pt-4">
               <motion.button

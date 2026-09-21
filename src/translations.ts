@@ -16,6 +16,7 @@ export interface TranslationSchema {
     about: string;
     contact: string;
     bookNow: string;
+    casting: string;
   };
   home: {
     heroTitle: string;
@@ -111,6 +112,44 @@ export interface TranslationSchema {
     quickLinks: string;
     warningAge: string;
   };
+  casting: {
+    heroTitle: string;
+    heroSubtitle: string;
+    badgeLocation: string;
+    badgeIncome: string;
+    badgeSafe: string;
+    vacanciesTitle: string;
+    vacanciesSubtitle: string;
+    roleDancersTitle: string;
+    roleDancersDesc: string;
+    roleDancersTag: string;
+    roleHostessTitle: string;
+    roleHostessDesc: string;
+    roleHostessTag: string;
+    roleBarTitle: string;
+    roleBarDesc: string;
+    roleBarTag: string;
+    benefitsTitle: string;
+    benefitsSubtitle: string;
+    benefit1Title: string;
+    benefit1Desc: string;
+    benefit2Title: string;
+    benefit2Desc: string;
+    benefit3Title: string;
+    benefit3Desc: string;
+    benefit4Title: string;
+    benefit4Desc: string;
+    benefit5Title: string;
+    benefit5Desc: string;
+    ctaSectionTitle: string;
+    ctaInstructionsTitle: string;
+    ctaInstruction1: string;
+    ctaInstruction2: string;
+    ctaInstruction3: string;
+    whatsappBtn: string;
+    emailLabel: string;
+    legalNotice: string;
+  };
 }
 
 export const translations: Record<Language, TranslationSchema> = {
@@ -130,6 +169,7 @@ export const translations: Record<Language, TranslationSchema> = {
       about: "About",
       contact: "Contact",
       bookNow: "Reserve Table",
+      casting: "Careers / Casting",
     },
     home: {
       heroTitle: "MARDIGRAS",
@@ -221,7 +261,7 @@ export const translations: Record<Language, TranslationSchema> = {
     },
     footer: {
       rights: "© 2026 Mardigras NightClub. All rights reserved.",
-      description: "Exclusive cocktail bar and luxury night club.",
+      description: "Your unforgettable party begins here, at the epicenter of the vibrant Albufeira Strip.",
       quickLinks: "Quick Access",
       warningAge: "Access is strictly restricted to individuals aged 18 and over. Smart elegant dress code required.",
     },
@@ -333,7 +373,7 @@ export const translations: Record<Language, TranslationSchema> = {
     },
     footer: {
       rights: "© 2026 Mardigras NightClub. Todos os direitos reservados.",
-      description: "O bar de cocktails e clube noturno exclusivo de luxo.",
+      description: "Sua festa inesquecível começa aqui, no epicentro da vibrante Albufeira Strip.",
       quickLinks: "Acesso Rápido",
       warningAge: "O acesso é estritamente reservado a maiores de 18 anos. Código de vestuário elegante e sofisticado obrigatório.",
     },
