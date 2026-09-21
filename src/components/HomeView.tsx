@@ -9,6 +9,9 @@ import clubVipLounge from '../assets/images/club_vip_lounge_1783389253637.jpg';
 import galleryItem1 from '../assets/images/gallery/gallery_item_1.jpg';
 import galleryItem6 from '../assets/images/gallery/gallery_item_6.jpg';
 import showsFeaturedImage from '../assets/images/shows_featured_upscaled.jpg';
+import luxuryEntertainmentImage from '../assets/images/pexels-nairodreyes-17750015.jpg';
+import luxuryCocktailsImage from '../assets/images/premium_cocktails_bar_1790019561057.jpg';
+import sensationShowImage from '../assets/images/pexels-babydov-7787568.jpg';
 
 interface HomeViewProps {
   language: Language;
@@ -140,11 +143,11 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
               <motion.img 
-                src={galleryItem1} 
-                alt="Entertainment Background" 
-                className="absolute left-0 top-0 h-full w-[125%] max-w-none object-cover opacity-55 group-hover:scale-105 group-hover:opacity-75 transition-all duration-700 select-none pointer-events-none"
+                src={luxuryEntertainmentImage} 
+                alt="Entretenimento ao Vivo de Luxo" 
+                className="absolute left-0 top-0 h-full w-[120%] max-w-none object-cover object-center opacity-70 group-hover:scale-105 group-hover:opacity-90 transition-all duration-700 select-none pointer-events-none"
                 animate={{
-                  x: ["0%", "-15%"]
+                  x: ["0%", "-10%"]
                 }}
                 transition={{
                   duration: 25,
@@ -153,9 +156,9 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
                   ease: "linear"
                 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-[#0a0a0a]/30 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent pointer-events-none" />
               {/* Extra radial overlay to vignette the corners slightly */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(10,10,10,0.6)_100%)] pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(10,10,10,0.5)_100%)] pointer-events-none" />
             </div>
 
             {/* Content wrapped in z-10 */}
@@ -178,11 +181,11 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
               <motion.img 
-                src={galleryItem6} 
-                alt="Drinks Background" 
-                className="absolute left-0 top-0 h-full w-[125%] max-w-none object-cover opacity-55 group-hover:scale-105 group-hover:opacity-75 transition-all duration-700 select-none pointer-events-none"
+                src={luxuryCocktailsImage} 
+                alt="Cocktails de Autor & Bebidas Premium" 
+                className="absolute left-0 top-0 h-full w-[120%] max-w-none object-cover object-center opacity-70 group-hover:scale-105 group-hover:opacity-90 transition-all duration-700 select-none pointer-events-none"
                 animate={{
-                  x: ["0%", "-15%"]
+                  x: ["0%", "-10%"]
                 }}
                 transition={{
                   duration: 25,
@@ -191,9 +194,9 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
                   ease: "linear"
                 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-[#0a0a0a]/30 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent pointer-events-none" />
               {/* Extra radial overlay to vignette the corners slightly */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(10,10,10,0.6)_100%)] pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(10,10,10,0.5)_100%)] pointer-events-none" />
             </div>
 
             {/* Content wrapped in z-10 */}
@@ -277,11 +280,11 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
             {/* Right Image Frame */}
             <div className="relative h-64 sm:h-96 lg:h-auto min-h-[300px] overflow-hidden group">
               <img
-                src={showsFeaturedImage}
+                src={sensationShowImage}
                 alt={t.home.tonightShow}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent lg:bg-gradient-to-r lg:from-neutral-950 lg:via-transparent lg:to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#0a0a0a] lg:via-transparent lg:to-transparent" />
             </div>
           </div>
         </div>
