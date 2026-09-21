@@ -20,16 +20,35 @@ interface HomeViewProps {
 
 export default function HomeView({ language, onNavigate }: HomeViewProps) {
   const t = translations[language];
+  const [heroImgSrc, setHeroImgSrc] = React.useState<string>(heroCabaretShow);
 
   return (
     <div className="space-y-20 pb-20">
       {/* Immersive Hero Section */}
       <section className="relative h-[85vh] md:h-[90vh] flex items-center justify-center overflow-hidden">
         {/* Background Image with elegant cinema lighting */}
-        <div className="absolute inset-0 z-0">
+        <div 
+          className="absolute inset-0 z-0 bg-[#080808]"
+          style={{
+            backgroundImage: `url(${heroImgSrc}), url('/hero-cabaret-banner.jpg'), url('/images/gallery_featured_upscaled.jpg')`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+          }}
+        >
           <motion.img 
-            src={heroCabaretShow} 
+            src={heroImgSrc} 
             alt="Mardigras NightClub Background" 
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            onError={() => {
+              // Resilient fallback chain for Hostinger deployments
+              if (heroImgSrc !== '/hero-cabaret-banner.jpg') {
+                setHeroImgSrc('/hero-cabaret-banner.jpg');
+              } else if (heroImgSrc !== '/images/gallery_featured_upscaled.jpg') {
+                setHeroImgSrc('/images/gallery_featured_upscaled.jpg');
+              }
+            }}
             className="w-full h-full object-cover select-none pointer-events-none opacity-80 brightness-105 contrast-110"
             animate={{
               scale: [1, 1.04, 1]

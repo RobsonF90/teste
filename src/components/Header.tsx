@@ -14,6 +14,7 @@ interface HeaderProps {
 
 export default function Header({ currentView, onNavigate, language, onChangeLanguage }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [bgSrc, setBgSrc] = useState(headerBg);
   const t = translations[language];
 
   const menuItems = [
@@ -33,10 +34,24 @@ export default function Header({ currentView, onNavigate, language, onChangeLang
     <>
       <header className="sticky top-0 z-40 w-full bg-[#0a0a0a]/45 backdrop-blur-md border-b border-gold/20 overflow-hidden">
         {/* Header Background Image with Overlay */}
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
+        <div 
+          className="absolute inset-0 z-0 pointer-events-none opacity-50 bg-[#0a0a0a]"
+          style={{
+            backgroundImage: `url(${bgSrc}), url('/header_background.jpg'), url('/images/header_background_1783896110456.jpg')`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+          }}
+        >
           <img 
-            src={headerBg} 
+            src={bgSrc} 
             alt="Mardigras NightClub Header Background" 
+            onError={() => {
+              if (bgSrc !== '/header_background.jpg') {
+                setBgSrc('/header_background.jpg');
+              } else if (bgSrc !== '/images/header_background_1783896110456.jpg') {
+                setBgSrc('/images/header_background_1783896110456.jpg');
+              }
+            }}
             className="w-full h-full object-cover object-center brightness-110"
           />
           {/* Gradients to blend smoothly */}
