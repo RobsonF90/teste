@@ -122,7 +122,7 @@ export default function GoogleMapView({ language }: GoogleMapViewProps) {
                       R. Fernão de Magalhães, 8200-129 Albufeira
                     </p>
                     <div className="text-[11px] font-medium text-neutral-700 bg-amber-50 p-1.5 rounded border border-amber-200 mb-2.5">
-                      🌙 {language === 'en' ? 'Open Every Day: 22:00 – 06:00' : 'Aberto Todos os Dias: 22:00 – 06:00'}
+                      🌙 {language === 'en' ? 'Open Every Day: 23:00 – 05:00' : 'Aberto Todos os Dias: 23:00 – 05:00'}
                     </div>
                     <div className="flex gap-2">
                       <a

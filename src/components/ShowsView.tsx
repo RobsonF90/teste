@@ -249,7 +249,7 @@ export default function ShowsView({ language }: ShowsViewProps) {
                     {language === 'en' ? 'Showtime Timings' : 'Horários dos Shows'}
                   </h4>
                   <p className="text-xs text-neutral-400">
-                    {language === 'en' ? 'Intermittent sets starting from 23:30 till late' : 'Sets intermitentes a partir das 23:30 até tarde'}
+                    {language === 'en' ? 'Intermittent sets starting from 23:00 till late' : 'Sets intermitentes a partir das 23:00 até tarde'}
                   </p>
                 </div>
               </div>
@@ -260,7 +260,7 @@ export default function ShowsView({ language }: ShowsViewProps) {
                     {language === 'en' ? 'Opening Schedule' : 'Dias e Horário de Abertura'}
                   </h4>
                   <p className="text-xs text-neutral-400">
-                    {language === 'en' ? 'Every day, doors open 22:00 – 06:00' : 'Todos os dias, abertura das 22:00 às 06:00'}
+                    {language === 'en' ? 'Every day, doors open 23:00 – 05:00' : 'Todos os dias, abertura das 23:00 às 05:00'}
                   </p>
                 </div>
               </div>
@@ -293,19 +293,19 @@ export default function ShowsView({ language }: ShowsViewProps) {
 
           <div className="flex flex-col sm:flex-row justify-center items-stretch gap-4 pt-4 max-w-lg mx-auto">
             <div className="bg-[#050505] border border-neutral-900 rounded-lg p-4 flex-1">
-              <span className="text-[10px] font-mono font-bold text-gold block mb-1">22:00</span>
+              <span className="text-[10px] font-mono font-bold text-gold block mb-1">23:00</span>
               <p className="text-xs font-semibold text-white">{language === 'en' ? 'DOORS OPEN' : 'ABERTURA DE PORTAS'}</p>
-              <p className="text-[10px] text-neutral-500 mt-1">{language === 'en' ? 'Lounge & Pre-show Drinks' : 'Lounge e Bebidas de Entrada'}</p>
+              <p className="text-[10px] text-neutral-500 mt-1">{language === 'en' ? 'Lounge & Welcome Drinks' : 'Lounge e Bebidas de Boas-Vindas'}</p>
             </div>
             <div className="bg-[#050505] border border-gold/20 rounded-lg p-4 flex-1">
-              <span className="text-[10px] font-mono font-bold text-gold block mb-1">23:30</span>
+              <span className="text-[10px] font-mono font-bold text-gold block mb-1">23:00</span>
               <p className="text-xs font-semibold text-white">{language === 'en' ? 'SHOWTIME CURTAIN' : 'INÍCIO DO SHOW'}</p>
               <p className="text-[10px] text-neutral-400 mt-1">{language === 'en' ? 'Main performances begin' : 'Começam as performances'}</p>
             </div>
             <div className="bg-[#050505] border border-neutral-900 rounded-lg p-4 flex-1">
-              <span className="text-[10px] font-mono font-bold text-gold block mb-1">01:30 - 06:00</span>
+              <span className="text-[10px] font-mono font-bold text-gold block mb-1">01:30 - 05:00</span>
               <p className="text-xs font-semibold text-white">{language === 'en' ? 'VIP DJ SET' : 'DJ SET DE ENCERRAMENTO'}</p>
-              <p className="text-[10px] text-neutral-500 mt-1">{language === 'en' ? 'Seductive club atmosphere till 06:00' : 'Clube e dança até às 06:00'}</p>
+              <p className="text-[10px] text-neutral-500 mt-1">{language === 'en' ? 'Seductive club atmosphere till 05:00' : 'Clube e dança até às 05:00'}</p>
             </div>
           </div>
         </div>

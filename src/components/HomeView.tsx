@@ -182,7 +182,7 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
             <div className="absolute inset-0 z-0">
               <motion.img 
                 src={luxuryCocktailsImage} 
-                alt="Cocktails de Autor & Bebidas Premium" 
+                alt={t.home.exp2Title} 
                 className="absolute left-0 top-0 h-full w-[120%] max-w-none object-cover object-center opacity-70 group-hover:scale-105 group-hover:opacity-90 transition-all duration-700 select-none pointer-events-none"
                 animate={{
                   x: ["0%", "-10%"]
@@ -305,8 +305,8 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
             </h2>
             <p className="text-sm sm:text-base text-gold font-medium tracking-wide">
               {language === 'en' 
-                ? 'Open Every Day | 22:00 – 06:00'
-                : 'Aberto Todos os Dias | 22:00 – 06:00'}
+                ? 'Open Every Day | 23:00 – 05:00'
+                : 'Aberto Todos os Dias | 23:00 – 05:00'}
             </p>
             <p className="text-sm text-neutral-300 leading-relaxed">
               {language === 'en' 
