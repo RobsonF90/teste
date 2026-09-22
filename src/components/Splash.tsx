@@ -31,6 +31,8 @@ export default function Splash({ onEnter }: SplashProps) {
         <img 
           src={heroCabaretShow} 
           alt="" 
+          loading="eager"
+          decoding="async"
           className="w-full h-full object-cover scale-105 filter blur-sm opacity-35" 
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/90" />

@@ -268,7 +268,9 @@ export default function ShowsView({ language }: ShowsViewProps) {
             <img
               src={showsFeaturedImage}
               alt="Mardigras NightClub Performance Stage"
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover object-[center_20%] sm:object-center transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 bg-black/80 border border-gold/40 rounded px-3 py-1 text-[10px] font-mono tracking-wider text-gold">
@@ -345,17 +347,19 @@ export default function ShowsView({ language }: ShowsViewProps) {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-12 rounded-xl overflow-hidden border border-gold/40 max-h-[300px] relative gold-glow"
+            className="mb-8 sm:mb-12 rounded-xl overflow-hidden border border-gold/40 relative gold-glow"
           >
             <img
               src={galleryItem6}
               alt="Premium Drinks Selection"
-              className="w-full h-[300px] object-cover object-center opacity-70"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-[200px] sm:h-[260px] md:h-[300px] object-cover object-center opacity-70"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/60" />
-            <div className="absolute bottom-6 left-6 right-6 space-y-1">
+            <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 space-y-1">
               <span className="text-[10px] font-mono text-gold uppercase tracking-widest font-bold">MARDIGRAS PREMIUM SELECTION</span>
-              <h3 className="font-serif text-xl sm:text-2xl text-white font-semibold">
+              <h3 className="font-serif text-lg sm:text-2xl text-white font-semibold">
                 {language === 'en' ? 'Exquisite Liquid Gold & Champagne' : 'Champanhes & Ouro Líquido Requintados'}
               </h3>
             </div>
@@ -367,17 +371,19 @@ export default function ShowsView({ language }: ShowsViewProps) {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-12 rounded-xl overflow-hidden border border-gold/40 max-h-[300px] relative gold-glow"
+            className="mb-8 sm:mb-12 rounded-xl overflow-hidden border border-gold/40 relative gold-glow"
           >
             <img
               src={galleryItem2}
               alt="Dance Performance VIP"
-              className="w-full h-[300px] object-cover object-center opacity-70"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-[200px] sm:h-[260px] md:h-[300px] object-cover object-center opacity-70"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/60" />
-            <div className="absolute bottom-6 left-6 right-6 space-y-1">
+            <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 space-y-1">
               <span className="text-[10px] font-mono text-gold uppercase tracking-widest font-bold">MARDIGRAS PRIVATE DANCES</span>
-              <h3 className="font-serif text-xl sm:text-2xl text-white font-semibold">
+              <h3 className="font-serif text-lg sm:text-2xl text-white font-semibold">
                 {language === 'en' ? 'Sensual Private Performances' : 'Performances Privadas Sensuais'}
               </h3>
             </div>
@@ -387,7 +393,7 @@ export default function ShowsView({ language }: ShowsViewProps) {
         {/* Interactive Menu Grid */}
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
         >
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => (
@@ -398,15 +404,30 @@ export default function ShowsView({ language }: ShowsViewProps) {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.3 }}
-                className="bg-[#0a0a0a] border border-neutral-900 rounded-xl p-6 hover:border-gold/40 hover:bg-neutral-900/10 transition-all flex flex-col justify-between group"
+                className="bg-[#0a0a0a] border border-neutral-900 rounded-xl p-5 sm:p-6 hover:border-gold/40 hover:bg-neutral-900/10 transition-all flex flex-col justify-between group"
               >
                 <div className="space-y-4 w-full">
                   {item.image && (
-                    <div className="w-full h-48 rounded-lg overflow-hidden border border-neutral-950 shadow-inner group-hover:border-gold/20 transition-all">
+                    <div className="w-full h-44 sm:h-52 rounded-lg overflow-hidden border border-neutral-950 bg-[#060606] shadow-inner group-hover:border-gold/25 transition-all relative flex items-center justify-center">
+                      {/* Ambient blurred backdrop so portrait bottles or wide photos blend seamlessly */}
+                      <img
+                        src={item.image}
+                        alt=""
+                        aria-hidden="true"
+                        className="absolute inset-0 w-full h-full object-cover blur-md opacity-25 scale-110 select-none pointer-events-none"
+                        loading="lazy"
+                        decoding="async"
+                      />
                       <img 
                         src={item.image} 
                         alt={item.name} 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 select-none pointer-events-none"
+                        loading="lazy"
+                        decoding="async"
+                        className={`relative z-10 w-full h-full ${
+                          item.category === 'premium_drinks'
+                            ? 'object-contain p-2.5 max-h-[165px] sm:max-h-[195px] drop-shadow-[0_10px_20px_rgba(0,0,0,0.85)]'
+                            : 'object-cover'
+                        } transition-transform duration-700 group-hover:scale-105 select-none pointer-events-none`}
                         referrerPolicy="no-referrer"
                       />
                     </div>

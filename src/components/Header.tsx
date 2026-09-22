@@ -46,6 +46,8 @@ export default function Header({ currentView, onNavigate, language, onChangeLang
           <img 
             src={bgSrc} 
             alt="Mardigras NightClub Header Background" 
+            loading="eager"
+            decoding="async"
             onError={() => {
               if (bgSrc !== '/header_background.jpg') {
                 setBgSrc('/header_background.jpg');

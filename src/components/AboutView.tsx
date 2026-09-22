@@ -99,16 +99,18 @@ export default function AboutView({ language }: AboutViewProps) {
         {/* Editorial Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Frame */}
-          <div className="lg:col-span-5 relative h-80 sm:h-96 rounded-xl overflow-hidden border border-gold/40 gold-glow">
+          <div className="lg:col-span-5 relative h-72 sm:h-96 rounded-xl overflow-hidden border border-gold/40 gold-glow">
             <img
               src={clubVipLounge}
               alt="Mardigras NightClub Luxury Lounge"
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover object-[center_35%]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
-            <div className="absolute bottom-6 left-6 flex items-center gap-3 bg-black/85 border border-gold/40 rounded-xl p-4">
-              <Award className="w-8 h-8 text-gold shrink-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+            <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-auto flex items-center gap-3 bg-black/90 backdrop-blur-md border border-gold/40 rounded-xl p-3 sm:p-4">
+              <Award className="w-7 h-7 sm:w-8 sm:h-8 text-gold shrink-0" />
               <div>
                 <h4 className="text-xs uppercase tracking-wider font-semibold text-white font-mono">
                   {t.about.starsBadge}

@@ -33,7 +33,7 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
           className="absolute inset-0 z-0 bg-[#080808]"
           style={{
             backgroundImage: `url(${heroImgSrc}), url('/hero-cabaret-banner.jpg'), url('/images/gallery_featured_upscaled.jpg')`,
-            backgroundPosition: 'center',
+            backgroundPosition: 'center 28%',
             backgroundSize: 'cover',
           }}
         >
@@ -51,7 +51,7 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
                 setHeroImgSrc('/images/gallery_featured_upscaled.jpg');
               }
             }}
-            className="w-full h-full object-cover select-none pointer-events-none opacity-80 brightness-105 contrast-110"
+            className="w-full h-full object-cover object-[center_28%] sm:object-center select-none pointer-events-none opacity-80 brightness-105 contrast-110"
             animate={{
               scale: [1, 1.04, 1]
             }}
@@ -150,13 +150,15 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
           <motion.div
             whileHover={{ y: -8 }}
             transition={{ type: 'spring', stiffness: 300 }}
-            className="relative overflow-hidden bg-[#0a0a0a] border border-gold rounded-xl p-8 flex flex-col items-start gap-5 gold-glow-hover transition-all group"
+            className="relative overflow-hidden bg-[#0a0a0a] border border-gold rounded-xl p-6 sm:p-8 flex flex-col items-start gap-4 sm:gap-5 min-h-[220px] sm:min-h-[260px] gold-glow-hover transition-all group"
           >
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
               <motion.img 
                 src={luxuryEntertainmentImage} 
                 alt="Entretenimento ao Vivo de Luxo" 
+                loading="lazy"
+                decoding="async"
                 className="absolute left-0 top-0 h-full w-[120%] max-w-none object-cover object-center opacity-70 group-hover:scale-105 group-hover:opacity-90 transition-all duration-700 select-none pointer-events-none"
                 animate={{
                   x: ["0%", "-10%"]
@@ -188,13 +190,15 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
           <motion.div
             whileHover={{ y: -8 }}
             transition={{ type: 'spring', stiffness: 300 }}
-            className="relative overflow-hidden bg-[#0a0a0a] border border-gold rounded-xl p-8 flex flex-col items-start gap-5 gold-glow-hover transition-all group"
+            className="relative overflow-hidden bg-[#0a0a0a] border border-gold rounded-xl p-6 sm:p-8 flex flex-col items-start gap-4 sm:gap-5 min-h-[220px] sm:min-h-[260px] gold-glow-hover transition-all group"
           >
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
               <motion.img 
                 src={luxuryCocktailsImage} 
                 alt={t.home.exp2Title} 
+                loading="lazy"
+                decoding="async"
                 className="absolute left-0 top-0 h-full w-[120%] max-w-none object-cover object-center opacity-70 group-hover:scale-105 group-hover:opacity-90 transition-all duration-700 select-none pointer-events-none"
                 animate={{
                   x: ["0%", "-10%"]
@@ -226,13 +230,15 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
           <motion.div
             whileHover={{ y: -8 }}
             transition={{ type: 'spring', stiffness: 300 }}
-            className="relative overflow-hidden bg-[#0a0a0a] border border-gold rounded-xl p-8 flex flex-col items-start gap-5 gold-glow-hover transition-all group"
+            className="relative overflow-hidden bg-[#0a0a0a] border border-gold rounded-xl p-6 sm:p-8 flex flex-col items-start gap-4 sm:gap-5 min-h-[220px] sm:min-h-[260px] gold-glow-hover transition-all group"
           >
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
               <motion.img 
                 src={clubVipLounge} 
                 alt="VIP Lounge Background" 
+                loading="lazy"
+                decoding="async"
                 className="absolute left-0 top-0 h-full w-[125%] max-w-none object-cover opacity-55 group-hover:scale-105 group-hover:opacity-75 transition-all duration-700 select-none pointer-events-none"
                 animate={{
                   x: ["0%", "-15%"]
@@ -290,13 +296,16 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
             </div>
 
             {/* Right Image Frame */}
-            <div className="relative h-64 sm:h-96 lg:h-auto min-h-[300px] overflow-hidden group">
+            <div className="relative h-64 sm:h-96 lg:h-auto min-h-[280px] sm:min-h-[340px] overflow-hidden group">
               <img
                 src={sensationShowImage}
                 alt={t.home.tonightShow}
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover object-[center_25%] sm:object-center transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#0a0a0a] lg:via-transparent lg:to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#0a0a0a] lg:via-transparent lg:to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-transparent to-transparent lg:hidden pointer-events-none" />
             </div>
           </div>
         </div>
@@ -306,14 +315,16 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div 
           onClick={() => onNavigate('contact')}
-          className="relative rounded-2xl bg-[#0a0a0a] border border-gold/40 hover:border-gold p-8 sm:p-12 md:p-16 overflow-hidden gold-glow transition-all cursor-pointer group"
+          className="relative rounded-2xl bg-[#0a0a0a] border border-gold/40 hover:border-gold p-6 sm:p-12 md:p-16 overflow-hidden gold-glow transition-all cursor-pointer group min-h-[320px] sm:min-h-[380px]"
         >
           {/* Background Atmosphere Image */}
           <div className="absolute inset-0 z-0 overflow-hidden">
             <motion.img 
               src={atmosphereTeaserImage} 
               alt="Mardi Gras Nightclub Atmosphere" 
-              className="w-full h-full object-cover object-[center_35%] opacity-70 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700 select-none pointer-events-none brightness-110"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover object-[center_30%] sm:object-[center_35%] opacity-70 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700 select-none pointer-events-none brightness-110"
             />
             {/* Cinematic gradient overlays with balanced transparency to keep image luminous and clear */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/90 via-[#0a0a0a]/45 to-[#0a0a0a]/35 pointer-events-none" />

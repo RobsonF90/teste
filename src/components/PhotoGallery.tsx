@@ -287,6 +287,33 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
     }
   }, [filteredItems.length, lightboxIndex]);
 
+  // Touch swipe handling for mobile phone screens
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchEndX, setTouchEndX] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEndX(null);
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEndX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX === null || touchEndX === null) return;
+    const distance = touchStartX - touchEndX;
+    const isLeftSwipe = distance > 45;
+    const isRightSwipe = distance < -45;
+    if (isLeftSwipe) {
+      handleNext();
+    } else if (isRightSwipe) {
+      handlePrev();
+    }
+    setTouchStartX(null);
+    setTouchEndX(null);
+  };
+
   // Keyboard navigation for lightbox
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -391,7 +418,7 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b border-neutral-900">
           {/* Category Tabs */}
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2">
             {[
               { key: 'all' as const, label: t.gallery.filterAll, count: counts.all },
               { key: 'shows' as const, label: t.gallery.filterPerformances, count: counts.shows },
@@ -408,7 +435,7 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
                     setActiveFilter(tab.key);
                     setLightboxIndex(null);
                   }}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${
+                  className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${
                     isActive
                       ? 'bg-gold text-black shadow-md shadow-gold/25 font-bold border border-gold'
                       : 'bg-[#0a0a0a] text-neutral-400 hover:text-white border border-neutral-800 hover:border-neutral-700'
@@ -416,7 +443,7 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
                 >
                   <span>{tab.label}</span>
                   <span
-                    className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                    className={`text-[9px] sm:text-[10px] font-mono px-1.5 py-0.5 rounded-full ${
                       isActive ? 'bg-black/30 text-black' : 'bg-neutral-900 text-neutral-400'
                     }`}
                   >
@@ -470,8 +497,8 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
           layout
           className={
             layoutMode === 'mosaic'
-              ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 auto-rows-[280px]'
-              : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6'
+              ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 auto-rows-[250px] sm:auto-rows-[290px]'
+              : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6'
           }
         >
           <AnimatePresence mode="popLayout">
@@ -492,8 +519,8 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
                   className={`group relative rounded-2xl overflow-hidden bg-[#090909] border border-neutral-900/90 hover:border-gold/50 cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(212,175,55,0.18)] transition-all ${
                     layoutMode === 'mosaic'
                       ? isMosaicSpan
-                        ? 'sm:col-span-2 row-span-1 sm:row-span-2 min-h-[300px]'
-                        : 'col-span-1 row-span-1'
+                        ? 'sm:col-span-2 row-span-1 sm:row-span-2 min-h-[260px] sm:min-h-[300px]'
+                        : 'col-span-1 row-span-1 min-h-[250px] sm:min-h-0'
                       : 'aspect-[4/3]'
                   }`}
                 >
@@ -504,10 +531,11 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="lazy"
+                    decoding="async"
                   />
 
-                  {/* Gradient Scrim */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-85 group-hover:opacity-95 transition-opacity duration-300" />
+                  {/* Gradient Scrim - optimized for mobile readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-85 group-hover:opacity-95 transition-opacity duration-300" />
 
                   {/* Top Floating Badges */}
                   <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
@@ -543,18 +571,18 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
                   </div>
 
                   {/* Bottom Information Card */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 z-10 flex flex-col justify-end">
-                    <h3 className="font-serif text-base sm:text-lg font-semibold text-white tracking-wide group-hover:text-gold-light transition-colors line-clamp-1">
+                  <div className="absolute bottom-0 left-0 right-0 p-3.5 sm:p-5 z-10 flex flex-col justify-end">
+                    <h3 className="font-serif text-sm sm:text-lg font-semibold text-white tracking-wide group-hover:text-gold-light transition-colors line-clamp-1">
                       {language === 'en' ? item.titleEn : item.titlePt}
                     </h3>
-                    <p className="text-[11px] sm:text-xs text-neutral-300 mt-1 line-clamp-2 leading-relaxed opacity-90 group-hover:opacity-100 transition-opacity">
+                    <p className="text-[11px] sm:text-xs text-neutral-300 mt-0.5 sm:mt-1 line-clamp-2 leading-relaxed opacity-90 group-hover:opacity-100 transition-opacity">
                       {language === 'en' ? item.descEn : item.descPt}
                     </p>
 
-                    {/* Quick WhatsApp Action prompt visible on hover */}
-                    <div className="mt-2.5 pt-2 border-t border-neutral-800/80 flex items-center justify-between text-[10px] text-gold font-mono tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-all transform translate-y-1 group-hover:translate-y-0">
-                      <span>{language === 'en' ? 'Click to inspect & reserve' : 'Clique para ver & reservar'}</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
+                    {/* Quick WhatsApp Action prompt - visible on mobile tap / desktop hover */}
+                    <div className="mt-2 pt-1.5 border-t border-neutral-800/80 flex items-center justify-between text-[10px] text-gold font-mono tracking-wider uppercase opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-all sm:transform sm:translate-y-1 sm:group-hover:translate-y-0">
+                      <span>{language === 'en' ? 'Tap to inspect & reserve' : 'Toque para ver & reservar'}</span>
+                      <ChevronRight className="w-3.5 h-3.5 text-gold" />
                     </div>
                   </div>
                 </motion.div>
@@ -627,7 +655,12 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
             </div>
 
             {/* Central Media Viewer & Nav Arrows */}
-            <div className="relative flex-1 flex items-center justify-center w-full max-w-6xl mx-auto my-auto min-h-0 py-2">
+            <div 
+              className="relative flex-1 flex flex-col items-center justify-center w-full max-w-6xl mx-auto my-auto min-h-0 py-1 sm:py-2 touch-pan-y"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
               {/* Prev Button */}
               <button
                 id="lightbox-prev-btn"
@@ -635,26 +668,26 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
                   e.stopPropagation();
                   handlePrev();
                 }}
-                className="absolute left-2 sm:left-4 z-30 p-3 rounded-full bg-black/70 hover:bg-neutral-900 border border-neutral-800 hover:border-gold/50 text-white hover:text-gold transition-all cursor-pointer shadow-xl backdrop-blur-md"
+                className="absolute left-1 sm:left-4 z-30 p-2 sm:p-3 rounded-full bg-black/75 hover:bg-neutral-900 border border-neutral-800 hover:border-gold/50 text-white hover:text-gold transition-all cursor-pointer shadow-xl backdrop-blur-md"
                 aria-label="Previous photo"
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
 
               {/* Main Media Item */}
               <div
-                className="max-h-[62vh] max-w-full flex items-center justify-center select-none"
+                className="max-h-[46vh] sm:max-h-[62vh] max-w-full flex items-center justify-center select-none"
                 onClick={(e) => e.stopPropagation()}
               >
                 {currentLightboxItem.type === 'video' && currentLightboxItem.videoSrc ? (
-                  <div className="relative rounded-2xl overflow-hidden border border-gold/40 shadow-[0_0_30px_rgba(212,175,55,0.25)] bg-black max-h-[60vh]">
+                  <div className="relative rounded-xl sm:rounded-2xl overflow-hidden border border-gold/40 shadow-[0_0_30px_rgba(212,175,55,0.25)] bg-black max-h-[44vh] sm:max-h-[60vh]">
                     <video
                       key={currentLightboxItem.id}
                       src={currentLightboxItem.videoSrc}
                       controls
                       autoPlay
                       playsInline
-                      className="max-h-[60vh] max-w-full rounded-2xl object-contain"
+                      className="max-h-[44vh] sm:max-h-[60vh] max-w-full rounded-xl sm:rounded-2xl object-contain"
                     />
                   </div>
                 ) : (
@@ -667,9 +700,14 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
                     src={currentLightboxItem.src}
                     alt={language === 'en' ? currentLightboxItem.titleEn : currentLightboxItem.titlePt}
                     referrerPolicy="no-referrer"
-                    className="max-h-[60vh] max-w-full rounded-2xl object-contain border border-gold/30 shadow-[0_0_30px_rgba(212,175,55,0.2)]"
+                    className="max-h-[44vh] sm:max-h-[60vh] max-w-full rounded-xl sm:rounded-2xl object-contain border border-gold/30 shadow-[0_0_30px_rgba(212,175,55,0.2)]"
                   />
                 )}
+              </div>
+
+              {/* Mobile Swipe Hint */}
+              <div className="sm:hidden text-center text-[10px] text-gold/80 font-mono tracking-wider pt-1 flex items-center justify-center gap-1.5 select-none pointer-events-none">
+                <span>{language === 'en' ? '← Swipe to browse photos →' : '← Deslize para ver as fotos →'}</span>
               </div>
 
               {/* Next Button */}
@@ -679,28 +717,28 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
                   e.stopPropagation();
                   handleNext();
                 }}
-                className="absolute right-2 sm:right-4 z-30 p-3 rounded-full bg-black/70 hover:bg-neutral-900 border border-neutral-800 hover:border-gold/50 text-white hover:text-gold transition-all cursor-pointer shadow-xl backdrop-blur-md"
+                className="absolute right-1 sm:right-4 z-30 p-2 sm:p-3 rounded-full bg-black/75 hover:bg-neutral-900 border border-neutral-800 hover:border-gold/50 text-white hover:text-gold transition-all cursor-pointer shadow-xl backdrop-blur-md"
                 aria-label="Next photo"
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
             </div>
 
             {/* Bottom Caption & Instant Reservation Strip */}
             <div
-              className="w-full max-w-4xl mx-auto z-20 pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#0a0a0a]/90 backdrop-blur-md p-4 rounded-2xl border border-neutral-800/90"
+              className="w-full max-w-4xl mx-auto z-20 pt-1.5 sm:pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 bg-[#0a0a0a]/90 backdrop-blur-md p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-neutral-800/90"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="space-y-1 text-center sm:text-left flex-1 min-w-0">
+              <div className="space-y-1 text-center sm:text-left flex-1 min-w-0 w-full sm:w-auto">
                 <div className="flex items-center justify-center sm:justify-start gap-2">
-                  <h4 className="font-serif text-base sm:text-lg font-semibold text-white tracking-wide truncate">
+                  <h4 className="font-serif text-sm sm:text-lg font-semibold text-white tracking-wide truncate">
                     {language === 'en' ? currentLightboxItem.titleEn : currentLightboxItem.titlePt}
                   </h4>
-                  <span className="text-[10px] font-mono text-gold px-2 py-0.5 rounded-full bg-gold/10 border border-gold/20 shrink-0">
+                  <span className="text-[9px] sm:text-[10px] font-mono text-gold px-2 py-0.5 rounded-full bg-gold/10 border border-gold/20 shrink-0">
                     {language === 'en' ? currentLightboxItem.tagEn : currentLightboxItem.tagPt}
                   </span>
                 </div>
-                <p className="text-xs text-neutral-300 leading-relaxed line-clamp-2 max-w-2xl">
+                <p className="text-[11px] sm:text-xs text-neutral-300 leading-relaxed line-clamp-2 max-w-2xl">
                   {language === 'en' ? currentLightboxItem.descEn : currentLightboxItem.descPt}
                 </p>
               </div>
@@ -710,9 +748,9 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
                 href={getWhatsAppBookingLink(currentLightboxItem)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-black font-semibold text-xs tracking-wider uppercase transition-all shadow-md hover:shadow-[0_0_15px_rgba(37,211,102,0.4)] cursor-pointer"
+                className="w-full sm:w-auto shrink-0 flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-black font-semibold text-xs tracking-wider uppercase transition-all shadow-md hover:shadow-[0_0_15px_rgba(37,211,102,0.4)] cursor-pointer"
               >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg className="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.428 1.98 13.96 1.05 11.47 1.05 6.03 1.05 1.61 5.424 1.606 10.856c-.001 1.704.451 3.371 1.31 4.887L1.93 20.17l4.717-1.016zM17.41 14.92c-.317-.159-1.88-.93-2.172-1.036-.29-.105-.503-.159-.714.159-.211.318-.818 1.036-1.003 1.248-.185.21-.37.238-.687.08-1.3-.647-2.316-1.185-3.232-2.76-.242-.415.242-.385.693-1.285.074-.15.037-.282-.019-.395-.056-.113-.503-1.218-.69-1.667-.181-.438-.364-.378-.503-.385-.13-.006-.279-.007-.428-.007-.15 0-.395.056-.602.282-.207.227-.79.773-.79 1.884s.806 2.186.918 2.337c.112.15 1.583 2.427 3.834 3.4s2.996 1.157 3.541 1.012c1.17-.31 1.88-1.22 2.17-2.036z"/>
                 </svg>
                 <span>{language === 'en' ? 'Book VIP Table' : 'Reservar Mesa VIP'}</span>
@@ -721,14 +759,14 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
 
             {/* Thumbnail Strip for Rapid Navigation */}
             <div
-              className="w-full max-w-4xl mx-auto overflow-x-auto py-2 flex items-center justify-center gap-2 z-20 no-scrollbar"
+              className="w-full max-w-4xl mx-auto overflow-x-auto py-1.5 flex items-center justify-start sm:justify-center gap-1.5 sm:gap-2 z-20 no-scrollbar touch-pan-x px-2"
               onClick={(e) => e.stopPropagation()}
             >
               {filteredItems.map((thumb, idx) => (
                 <button
                   key={`thumb-${thumb.id}`}
                   onClick={() => setLightboxIndex(idx)}
-                  className={`relative w-12 h-10 rounded-lg overflow-hidden shrink-0 border transition-all cursor-pointer ${
+                  className={`relative w-10 h-8 sm:w-12 sm:h-10 rounded-md sm:rounded-lg overflow-hidden shrink-0 border transition-all cursor-pointer ${
                     idx === lightboxIndex
                       ? 'border-gold scale-110 shadow-[0_0_10px_rgba(212,175,55,0.4)] opacity-100'
                       : 'border-neutral-800 opacity-50 hover:opacity-80'
@@ -740,6 +778,8 @@ export default function PhotoGallery({ language }: PhotoGalleryProps) {
                     alt=""
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
+                    decoding="async"
                   />
                   {thumb.type === 'video' && (
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
