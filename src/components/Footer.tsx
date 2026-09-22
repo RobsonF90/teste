@@ -118,7 +118,7 @@ export default function Footer({ language, onNavigate }: FooterProps) {
             <span className="text-neutral-600">
               By{' '}
               <a
-                href="https://wa.me/5191982527909?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20sites%20que%20voce%20cria."
+                href="https://wa.me/5591986406936?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20sites%20que%20voce%20cria."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-400 hover:text-gold transition-colors font-semibold"
