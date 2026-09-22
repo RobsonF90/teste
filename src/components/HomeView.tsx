@@ -13,6 +13,7 @@ import showsFeaturedImage from '../assets/images/shows_featured_upscaled.jpg';
 import luxuryEntertainmentImage from '../assets/images/pexels-nairodreyes-17750015.jpg';
 import luxuryCocktailsImage from '../assets/images/premium_cocktails_bar_1790019561057.jpg';
 import sensationShowImage from '../assets/images/pexels-babydov-7787568.jpg';
+import atmosphereTeaserImage from '../assets/images/pexels-faizialiphotography-9463617.jpg';
 
 interface HomeViewProps {
   language: Language;
@@ -305,24 +306,36 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div 
           onClick={() => onNavigate('contact')}
-          className="relative rounded-xl bg-gold-dark border border-gold/40 hover:border-gold p-8 sm:p-12 md:p-16 overflow-hidden gold-glow transition-all cursor-pointer group"
+          className="relative rounded-2xl bg-[#0a0a0a] border border-gold/40 hover:border-gold p-8 sm:p-12 md:p-16 overflow-hidden gold-glow transition-all cursor-pointer group"
         >
+          {/* Background Atmosphere Image */}
+          <div className="absolute inset-0 z-0 overflow-hidden">
+            <motion.img 
+              src={atmosphereTeaserImage} 
+              alt="Mardi Gras Nightclub Atmosphere" 
+              className="w-full h-full object-cover object-[center_35%] opacity-70 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700 select-none pointer-events-none brightness-110"
+            />
+            {/* Cinematic gradient overlays with balanced transparency to keep image luminous and clear */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/90 via-[#0a0a0a]/45 to-[#0a0a0a]/35 pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(10,10,10,0.65)_100%)] pointer-events-none" />
+          </div>
+
           {/* Absolute decorative glow */}
-          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-gold/10 blur-3xl pointer-events-none" />
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-gold/20 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 space-y-4 max-w-xl mx-auto">
-            <span className="text-xs font-semibold text-gold tracking-[0.25em] uppercase font-mono block">
+            <span className="text-xs font-semibold text-gold tracking-[0.25em] uppercase font-mono block drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
               {t.home.hoursTeaser}
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-white">
+            <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
               {t.home.hoursTeaserDesc}
             </h2>
-            <p className="text-sm sm:text-base text-gold font-medium tracking-wide">
+            <p className="text-sm sm:text-base text-gold font-medium tracking-wide drop-shadow-[0_2px_6px_rgba(0,0,0,1)]">
               {language === 'en' 
                 ? 'Open Every Day | 23:00 – 05:00'
                 : 'Aberto Todos os Dias | 23:00 – 05:00'}
             </p>
-            <p className="text-sm sm:text-base text-neutral-200 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-neutral-100 leading-relaxed font-normal drop-shadow-[0_2px_6px_rgba(0,0,0,1)]">
               {language === 'en' 
                 ? 'Join us for an unforgettable night. Advance reservations by clicking the card below.'
                 : 'Junte-se a nós para uma noite inesquecível. Reservas antecipadas clicando no card abaixo.'}
