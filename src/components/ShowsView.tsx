@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Language, translations } from '../translations';
-import { GlassWater, Sparkles, Clock, Calendar, ShieldCheck, Heart } from 'lucide-react';
+import { GlassWater, Clock, Calendar, ShieldCheck, Heart } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 // Import custom generated images
@@ -231,9 +231,6 @@ export default function ShowsView({ language }: ShowsViewProps) {
         {/* Dynamic Split Frame: Cabaret Description */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-[#0a0a0a] border border-gold/20 rounded-2xl overflow-hidden p-6 sm:p-10 md:p-12 gold-glow">
           <div className="lg:col-span-7 space-y-6">
-            <span className="text-xs uppercase tracking-[0.3em] font-bold text-gold font-mono flex items-center gap-2">
-              <Sparkles className="w-4 h-4" /> {t.shows.experienceIntro}
-            </span>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-semibold text-white tracking-wide">
               {language === 'en' ? 'An Unforgettable Night of Entertainment' : 'Uma Noite Inesquecível de Entretenimento'}
             </h2>
