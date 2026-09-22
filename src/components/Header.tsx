@@ -6,8 +6,8 @@ import BrandLogo from './BrandLogo';
 import headerBg from '../assets/images/header_background_1783896110456.jpg';
 
 interface HeaderProps {
-  currentView: 'home' | 'shows' | 'gallery' | 'about' | 'contact';
-  onNavigate: (view: 'home' | 'shows' | 'gallery' | 'about' | 'contact') => void;
+  currentView: 'home' | 'shows' | 'gallery' | 'about' | 'contact' | 'casting';
+  onNavigate: (view: 'home' | 'shows' | 'gallery' | 'about' | 'contact' | 'casting') => void;
   language: Language;
   onChangeLanguage: (lang: Language) => void;
 }
@@ -23,9 +23,10 @@ export default function Header({ currentView, onNavigate, language, onChangeLang
     { key: 'gallery', label: t.nav.gallery },
     { key: 'about', label: t.nav.about },
     { key: 'contact', label: t.nav.contact },
+    { key: 'casting', label: t.nav.casting },
   ] as const;
 
-  const handleLinkClick = (key: 'home' | 'shows' | 'gallery' | 'about' | 'contact') => {
+  const handleLinkClick = (key: 'home' | 'shows' | 'gallery' | 'about' | 'contact' | 'casting') => {
     onNavigate(key);
     setIsOpen(false);
   };

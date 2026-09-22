@@ -5,7 +5,7 @@ import BrandLogo from './BrandLogo';
 
 interface FooterProps {
   language: Language;
-  onNavigate: (view: 'home' | 'shows' | 'gallery' | 'about' | 'contact') => void;
+  onNavigate: (view: 'home' | 'shows' | 'gallery' | 'about' | 'contact' | 'casting') => void;
 }
 
 export default function Footer({ language, onNavigate }: FooterProps) {
@@ -57,6 +57,12 @@ export default function Footer({ language, onNavigate }: FooterProps) {
               <li>
                 <button onClick={() => onNavigate('contact')} className="hover:text-gold-light transition-colors cursor-pointer text-left">
                   {t.nav.contact}
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('casting')} className="hover:text-gold-light transition-colors cursor-pointer text-left text-emerald-400 flex items-center gap-1.5 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  {t.nav.casting}
                 </button>
               </li>
             </ul>

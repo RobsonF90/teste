@@ -10,13 +10,14 @@ import ShowsView from './components/ShowsView';
 import GalleryView from './components/GalleryView';
 import AboutView from './components/AboutView';
 import ContactView from './components/ContactView';
+import CastingView from './components/CastingView';
 
 import { AnimatePresence, motion } from 'motion/react';
 
 export default function App() {
   const [language, setLanguage] = useState<Language>('en');
   const [showSplash, setShowSplash] = useState(true);
-  const [currentView, setCurrentView] = useState<'home' | 'shows' | 'gallery' | 'about' | 'contact'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'shows' | 'gallery' | 'about' | 'contact' | 'casting'>('home');
 
   // Verify stored configurations on mount
   useEffect(() => {
@@ -38,10 +39,12 @@ export default function App() {
   // Hash-based routing to allow browser back/forward and permanent links
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash.replace('#/', '');
-      if (['home', 'shows', 'gallery', 'about', 'contact'].includes(hash)) {
-        setCurrentView(hash as any);
-        // Scroll back to top on navigation to feel like a separate page
+      const rawHash = window.location.hash.replace('#/', '').replace('#', '');
+      if (rawHash === 'trabalhe-connosco' || rawHash === 'casting') {
+        setCurrentView('casting');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (['home', 'shows', 'gallery', 'about', 'contact', 'casting'].includes(rawHash)) {
+        setCurrentView(rawHash as any);
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else {
         window.location.hash = '#/home';
@@ -79,7 +82,7 @@ export default function App() {
   };
 
   // Navigate to view by updating window hash
-  const handleNavigate = (view: 'home' | 'shows' | 'gallery' | 'about' | 'contact') => {
+  const handleNavigate = (view: 'home' | 'shows' | 'gallery' | 'about' | 'contact' | 'casting') => {
     window.location.hash = `#/${view}`;
   };
 
@@ -126,6 +129,9 @@ export default function App() {
                 )}
                 {currentView === 'contact' && (
                   <ContactView language={language} />
+                )}
+                {currentView === 'casting' && (
+                  <CastingView language={language} />
                 )}
               </motion.div>
             </AnimatePresence>

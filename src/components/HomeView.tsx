@@ -2,6 +2,7 @@ import React from 'react';
 import { Language, translations } from '../translations';
 import { Sparkles, GlassWater, Landmark, Calendar, ArrowRight, Play, Volume2, VolumeX } from 'lucide-react';
 import { motion } from 'motion/react';
+import CameraFlashEffect from './CameraFlashEffect';
 
 // Import custom generated images
 import heroCabaretShow from '../assets/images/gallery_featured_upscaled.jpg';
@@ -78,6 +79,9 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.6)_100%)] pointer-events-none" />
         </div>
 
+        {/* Dynamic VIP & Paparazzi Camera Flash Effects */}
+        <CameraFlashEffect />
+
         <div className="relative z-10 max-w-4xl mx-auto text-center px-4 space-y-6">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -124,18 +128,6 @@ export default function HomeView({ language, onNavigate }: HomeViewProps) {
               {t.home.ctaExplore}
             </button>
           </motion.div>
-        </div>
-
-        {/* Bottom scroll teaser */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-70">
-          <span className="text-[10px] font-mono tracking-widest text-gold/80 uppercase">
-            {language === 'en' ? 'SCROLL DOWN' : 'DESLIZAR'}
-          </span>
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="w-1 h-3 rounded-full bg-gold"
-          />
         </div>
       </section>
 
